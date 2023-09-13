@@ -1,11 +1,16 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useAuth } from "../context/authContext";
 
 const Home = () => {
-  return (
-    <div>
-      Home Page
-    </div>
-  )
-}
+  const { signin, authToken } = useAuth();
 
-export default Home
+  useEffect(() => {
+    if (authToken === null && !localStorage.getItem("authToken")) {
+      signin();
+    }
+  }, [authToken, signin]);
+
+  return <div>Home Page</div>;
+};
+
+export default Home;
