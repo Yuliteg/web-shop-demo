@@ -3,7 +3,8 @@ import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import { routePaths } from "./routePaths";
 import App from "../App";
-import Order from "../pages/Order";
+import Orders from "../pages/Order";
+import Basket from "../pages/Basket";
 
 export const routes = createBrowserRouter([
   {
@@ -15,7 +16,8 @@ export const routes = createBrowserRouter([
         path: "",
         element: <Home />,
       },
-      { path: "order", element: <Order /> },
+      { path: "basket", element: <Basket /> },
+      { path: "orders", element: <Orders /> },
     ],
   },
 ]);
