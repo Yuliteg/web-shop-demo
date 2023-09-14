@@ -57,7 +57,7 @@ const Navbar = () => {
               edge="start"
               sx={{ mr: 2 }}
             >
-              <Badge badgeContent={totalQuantity} color="success">
+              <Badge badgeContent={totalQuantity || "0"} color="success">
                 <Typography
                   variant="h6"
                   color="#401c64"
