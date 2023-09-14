@@ -11,7 +11,7 @@ const ProductList = ({ products }) => {
   return (
     <GridStyle container spacing={4}>
       {products.map((product) => (
-        <Grid key={product.id} item xs={9} sm={6} lg={3}>
+        <Grid key={product.id} item xs={8} sm={5.5} lg={3}>
           <ProductCard product={product} />
         </Grid>
       ))}

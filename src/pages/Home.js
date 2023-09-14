@@ -1,18 +1,26 @@
 import { useEffect } from "react";
 import { useAuth } from "../context/authContext";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box, Grid, CircularProgress } from "@mui/material";
 import shopIcon from "../assets/shop.png";
 import ProductList from "../components/ProductList";
-import { productListData } from "../data/testData";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/productSlice";
 
 const Home = () => {
   const { signin, authToken } = useAuth();
+  const dispatch = useDispatch();
+  const { products, loading } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (authToken === null && !localStorage.getItem("authToken")) {
       signin();
     }
-  }, [authToken, signin]);
+    authToken && dispatch(fetchProducts(authToken));
+  }, [authToken, signin, dispatch]);
+
+  useEffect(() => {
+    console.log("Products:", products);
+  }, [products]);
 
   return (
     <Box>
@@ -24,7 +32,18 @@ const Home = () => {
         Our products:
       </Typography>
       <Grid item xs={12} md={9}>
-        <ProductList products={productListData} />
+        {loading ? (
+          <Box
+            display="flex"
+            width="100%"
+            justifyContent="center"
+            marginTop={10}
+          >
+            <CircularProgress size="4rem" />
+          </Box>
+        ) : (
+          products && <ProductList products={products} />
+        )}
       </Grid>
     </Box>
   );
