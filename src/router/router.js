@@ -5,12 +5,17 @@ import { routePaths } from "./routePaths";
 import App from "../App";
 import Orders from "../pages/Order";
 import Basket from "../pages/Basket";
+import MainContainer from "../components/container/MainContainer";
 
 export const routes = createBrowserRouter([
   {
     path: routePaths.base,
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: (
+      <MainContainer>
+        <NotFound />
+      </MainContainer>
+    ),
     children: [
       {
         path: "",

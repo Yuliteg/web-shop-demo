@@ -6,8 +6,8 @@ import {
   AppBar,
   Toolbar,
 } from "@mui/material";
-import StoreIcon from "@mui/icons-material/Store";
 import { NavLink } from "react-router-dom";
+import bagIcon from "../assets/bags.png";
 
 const Navbar = () => {
   return (
@@ -29,18 +29,14 @@ const Navbar = () => {
           }}
         >
           <NavLink to="/" style={{ textDecoration: "none" }}>
-            <Box display="flex" alignItems="center">
+            <Box display="flex">
               <Typography variant="h6" color="black" cursor="pointer">
                 WebShop
               </Typography>
-              <StoreIcon
-                sx={{
-                  ml: "5%",
-                  color: "#5a2b89",
-                  "&:active, &:visited": {
-                    color: "#5a2b89",
-                  },
-                }}
+              <img
+                src={bagIcon}
+                alt="Bag icon"
+                style={{ width: "28px", height: "28px" }}
               />
             </Box>
           </NavLink>

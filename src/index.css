@@ -1,5 +1,7 @@
 :root {
   --navbar-height: 4.5rem;
+  --footer-height: 4.5rem;
+  --minHeight: calc(100vh - (var(--navbar-height) + var(--footer-height)));
 }
 
 body {
