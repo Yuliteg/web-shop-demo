@@ -3,19 +3,26 @@ import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import { routePaths } from "./routePaths";
 import App from "../App";
-import Order from "../pages/Order";
+import Orders from "../pages/Order";
+import Basket from "../pages/Basket";
+import MainContainer from "../components/container/MainContainer";
 
 export const routes = createBrowserRouter([
   {
     path: routePaths.base,
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: (
+      <MainContainer>
+        <NotFound />
+      </MainContainer>
+    ),
     children: [
       {
         path: "",
         element: <Home />,
       },
-      { path: "order", element: <Order /> },
+      { path: "basket", element: <Basket /> },
+      { path: "orders", element: <Orders /> },
     ],
   },
 ]);

@@ -4,5 +4,6 @@ const route = (routePath) => `${BASE_APP_PATH}${routePath}`;
 
 export const routePaths = {
   base: route(""),
-  order: route("order"),
+  basket: route("basket"),
+  order: route("orders"),
 };
