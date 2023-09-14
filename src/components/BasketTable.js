@@ -11,6 +11,18 @@ import {
 } from "@mui/material";
 
 const BasketTable = ({ basketData }) => {
+  const calculateSubtotal = (item) => {
+    return (item.amount * item.quantity).toFixed(2);
+  };
+
+  const calculateTotal = () => {
+    const totalPrice = basketData.reduce(
+      (total, item) => total + item.amount * item.quantity,
+      0
+    );
+    return totalPrice.toFixed(2);
+  };
+
   return (
     <div
       style={{
@@ -42,13 +54,13 @@ const BasketTable = ({ basketData }) => {
                     <IconButton style={{ marginTop: "1px" }}>+</IconButton>
                   </div>
                 </TableCell>
-                <TableCell>$Subtotal</TableCell>
+                <TableCell>${calculateSubtotal(item)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <p>Total Price: $Total</p>
+      <p>Total Price: ${calculateTotal()}</p>
       <Button variant="contained" color="primary">
         Checkout
       </Button>

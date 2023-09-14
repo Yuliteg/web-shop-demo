@@ -9,13 +9,21 @@ import {
 } from "@mui/material";
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import productImg from "../assets/productImg/pexels-ylanite-koppens-1152665.jpg";
+import { useDispatch } from "react-redux";
+import { addItemToBasket } from "../redux/basketSlice";
 
 const CardStyle = styled(Card)(({ theme }) => ({
   boxShadow: `0px 0px 4px rgba(145, 158, 171, 0.24), 0px 4px 8px -4px rgba(145, 158, 171, 0.24)`,
 }));
 
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+
   const { name, amount, imageUrl, description } = product;
+
+  const addToBasket = () => {
+    dispatch(addItemToBasket(product));
+  };
 
   return (
     <CardStyle>
@@ -60,6 +68,7 @@ const ProductCard = ({ product }) => {
               color="success"
               endIcon={<ShoppingCartOutlined />}
               sx={{ fontSize: "12px" }}
+              onClick={addToBasket}
             >
               Add to Basket
             </Button>

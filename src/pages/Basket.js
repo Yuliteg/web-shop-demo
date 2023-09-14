@@ -3,11 +3,12 @@ import emptyBasket from "../assets/shopping-cart.1021x1024.png";
 import BasketTable from "../components/BasketTable";
 import { Typography } from "@mui/material";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-
-const basketTest = null;
+import { useSelector } from "react-redux";
 
 const Basket = () => {
-  if (!basketTest || basketTest.length === 0)
+  const { basketItems } = useSelector((state) => state.basket);
+
+  if (!basketItems || basketItems.length === 0)
     return (
       <EmptyContent
         title="Your Basket"
@@ -22,7 +23,7 @@ const Basket = () => {
       <Typography fontSize="30px" textAlign="center" marginBottom="2rem">
         Basket <ShoppingBasketIcon color="primary" />
       </Typography>
-      <BasketTable basketData={basketTest} />
+      <BasketTable basketData={basketItems} />
     </>
   );
 };
