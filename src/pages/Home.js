@@ -18,10 +18,6 @@ const Home = () => {
     authToken && dispatch(fetchProducts(authToken));
   }, [authToken, signin, dispatch]);
 
-  useEffect(() => {
-    console.log("Products:", products);
-  }, [products]);
-
   return (
     <Box>
       <Typography textAlign="center" variant="h5">

@@ -8,8 +8,16 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import bagIcon from "../assets/bags.png";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { basketItems } = useSelector((state) => state.basket);
+
+  const totalQuantity = basketItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <>
       <AppBar
@@ -49,7 +57,7 @@ const Navbar = () => {
               edge="start"
               sx={{ mr: 2 }}
             >
-              <Badge badgeContent="0" color="success">
+              <Badge badgeContent={totalQuantity || "0"} color="success">
                 <Typography
                   variant="h6"
                   color="#401c64"

@@ -6,11 +6,39 @@ import {
   TableHead,
   TableRow,
   Paper,
-  IconButton,
-  Button,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { useDispatch } from "react-redux";
+import { addItemToBasket, removeItemFromBasket } from "../redux/basketSlice";
 
-const BasketTable = ({ basketData }) => {
+const BasketTable = ({ basketData, isCheckout }) => {
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItemToBasket(item));
+  };
+
+  const handleRemoveItem = (item) => {
+    if (item.quantity > 1) {
+      dispatch(removeItemFromBasket(item));
+    } else {
+      dispatch(removeItemFromBasket(item, { fullRemove: true }));
+    }
+  };
+
+  const calculateSubtotal = (item) => {
+    return (item.amount * item.quantity).toFixed(2);
+  };
+
+  const calculateTotal = () => {
+    const totalPrice = basketData.reduce(
+      (total, item) => total + item.amount * item.quantity,
+      0
+    );
+    return totalPrice.toFixed(2);
+  };
+
   return (
     <div
       style={{
@@ -20,7 +48,7 @@ const BasketTable = ({ basketData }) => {
         gap: "1rem",
       }}
     >
-      <TableContainer component={Paper} sx={{ maxWidth: "850px" }}>
+      <TableContainer component={Paper} sx={{ maxWidth: "950px" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -36,22 +64,33 @@ const BasketTable = ({ basketData }) => {
                 <TableCell>{item.name}</TableCell>
                 <TableCell>${item.amount.toFixed(2)}</TableCell>
                 <TableCell align="center">
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <IconButton>-</IconButton>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: "3%" }}
+                  >
+                    {!isCheckout && (
+                      <RemoveIcon
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => handleRemoveItem(item)}
+                      />
+                    )}
                     {item.quantity}
-                    <IconButton style={{ marginTop: "1px" }}>+</IconButton>
+                    {!isCheckout && (
+                      <AddIcon
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => handleAddItem(item)}
+                      />
+                    )}
                   </div>
                 </TableCell>
-                <TableCell>$Subtotal</TableCell>
+                <TableCell>${calculateSubtotal(item)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <p>Total Price: $Total</p>
-      <Button variant="contained" color="primary">
-        Checkout
-      </Button>
+      <p>
+        Total Price: <strong>${calculateTotal()}</strong>
+      </p>
     </div>
   );
 };
