@@ -2,7 +2,6 @@ import {
   CardActions,
   Divider,
   Box,
-  styled,
   Card,
   Typography,
   Button,
@@ -11,10 +10,6 @@ import { ShoppingCartOutlined } from "@mui/icons-material";
 import productImg from "../assets/productImg/pexels-ylanite-koppens-1152665.jpg";
 import { useDispatch } from "react-redux";
 import { addItemToBasket } from "../redux/basketSlice";
-
-const CardStyle = styled(Card)(({ theme }) => ({
-  boxShadow: `0px 0px 4px rgba(145, 158, 171, 0.24), 0px 4px 8px -4px rgba(145, 158, 171, 0.24)`,
-}));
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -26,7 +21,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <CardStyle>
+    <Card>
       <Box sx={{ pt: "100%", position: "relative" }}>
         <Box
           sx={{
@@ -75,7 +70,7 @@ const ProductCard = ({ product }) => {
           </CardActions>
         </Box>
       </Box>
-    </CardStyle>
+    </Card>
   );
 };
 
