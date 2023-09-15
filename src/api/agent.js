@@ -1,8 +1,5 @@
 import axios from "axios";
-
-const baseUrl = "http://webshopdemo.devweb.b-s.si";
-const tenant = "WebShopDemo";
-const company = "FLB";
+import { baseUrl, company, tenant } from "../lib/constants";
 
 const createApiAgent = () => {
   const axiosInstance = axios.create({

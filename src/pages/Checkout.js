@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import BasketTable from "../components/BasketTable";
-import { placeOrder } from "../redux/orderSlice";
 import { useAuth } from "../context/authContext";
 import { resetBasket } from "../redux/basketSlice";
 import { Link } from "react-router-dom";
+import { createOrderAndItems } from "../api/ordersThunks";
 
 const Checkout = () => {
   const { authToken } = useAuth();
@@ -30,7 +30,7 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(placeOrder({ formData, basketItems, authToken }));
+    dispatch(createOrderAndItems({ formData, basketItems, authToken }));
     dispatch(resetBasket());
     setIsFinishOrder(true);
   };
@@ -71,8 +71,9 @@ const Checkout = () => {
                 onChange={handleChange}
                 margin="normal"
                 sx={{
-                  "& input": { paddingTop: "11px", paddingBottom: "14px" },
+                  "& input": { paddingTop: "11px" },
                 }}
+                required
               />
               <TextField
                 label="City"
@@ -83,8 +84,9 @@ const Checkout = () => {
                 onChange={handleChange}
                 margin="normal"
                 sx={{
-                  "& input": { paddingTop: "11px", paddingBottom: "14px" },
+                  "& input": { paddingTop: "11px" },
                 }}
+                required
               />
               <TextField
                 label="Name"
@@ -95,8 +97,9 @@ const Checkout = () => {
                 onChange={handleChange}
                 margin="normal"
                 sx={{
-                  "& input": { paddingTop: "11px", paddingBottom: "14px" },
+                  "& input": { paddingTop: "11px" },
                 }}
+                required
               />
               <TextField
                 label="Postal Code"
@@ -107,8 +110,9 @@ const Checkout = () => {
                 onChange={handleChange}
                 margin="normal"
                 sx={{
-                  "& input": { paddingTop: "11px", paddingBottom: "14px" },
+                  "& input": { paddingTop: "11px" },
                 }}
+                required
               />
               <Button
                 type="submit"
