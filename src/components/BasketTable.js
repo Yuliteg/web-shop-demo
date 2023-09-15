@@ -6,14 +6,13 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useDispatch } from "react-redux";
 import { addItemToBasket, removeItemFromBasket } from "../redux/basketSlice";
 
-const BasketTable = ({ basketData }) => {
+const BasketTable = ({ basketData, isCheckout }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
@@ -49,7 +48,7 @@ const BasketTable = ({ basketData }) => {
         gap: "1rem",
       }}
     >
-      <TableContainer component={Paper} sx={{ maxWidth: "850px" }}>
+      <TableContainer component={Paper} sx={{ maxWidth: "950px" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -68,15 +67,19 @@ const BasketTable = ({ basketData }) => {
                   <div
                     style={{ display: "flex", alignItems: "center", gap: "3%" }}
                   >
-                    <RemoveIcon
-                      sx={{ cursor: "pointer" }}
-                      onClick={() => handleRemoveItem(item)}
-                    />
+                    {!isCheckout && (
+                      <RemoveIcon
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => handleRemoveItem(item)}
+                      />
+                    )}
                     {item.quantity}
-                    <AddIcon
-                      sx={{ cursor: "pointer" }}
-                      onClick={() => handleAddItem(item)}
-                    />
+                    {!isCheckout && (
+                      <AddIcon
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => handleAddItem(item)}
+                      />
+                    )}
                   </div>
                 </TableCell>
                 <TableCell>${calculateSubtotal(item)}</TableCell>
@@ -88,9 +91,6 @@ const BasketTable = ({ basketData }) => {
       <p>
         Total Price: <strong>${calculateTotal()}</strong>
       </p>
-      <Button variant="contained" color="primary">
-        Checkout
-      </Button>
     </div>
   );
 };

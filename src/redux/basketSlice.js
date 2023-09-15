@@ -16,8 +16,15 @@ const basketSlice = createSlice({
 
       if (itemInBasket) {
         itemInBasket.quantity += 1;
+        itemInBasket.total_Amount = itemInBasket.amount * itemInBasket.quantity;
       } else {
-        state.basketItems.push({ ...newItem, quantity: 1 });
+        const newItemWithFields = {
+          ...newItem,
+          quantity: 1,
+          item_Lookup: newItem.key,
+          total_Amount: newItem.amount,
+        };
+        state.basketItems.push(newItemWithFields);
       }
     },
     removeItemFromBasket: (state, action) => {
@@ -27,12 +34,16 @@ const basketSlice = createSlice({
         (item) => item.id === itemToRemove.id
       );
 
+      const basketItem = state.basketItems[itemIndex];
+
       if (itemIndex !== -1) {
         if (action.payload.fullRemove) {
           state.basketItems.splice(itemIndex, 1);
         } else {
-          if (state.basketItems[itemIndex].quantity > 1) {
-            state.basketItems[itemIndex].quantity -= 1;
+          if (basketItem.quantity > 1) {
+            basketItem.quantity -= 1;
+            basketItem.total_Amount =
+              basketItem.amount * state.basketItems[itemIndex].quantity;
           } else {
             state.basketItems.splice(itemIndex, 1);
           }
