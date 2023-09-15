@@ -6,6 +6,7 @@ import MainContainer from "./components/container/MainContainer";
 import Footer from "./components/Footer";
 
 function App() {
+  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

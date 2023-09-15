@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import { routePaths } from "./routePaths";
 import App from "../App";
-import Orders from "../pages/Order";
+import Orders from "../pages/Orders";
 import Basket from "../pages/Basket";
 import MainContainer from "../components/container/MainContainer";
 import Checkout from "../pages/Checkout";

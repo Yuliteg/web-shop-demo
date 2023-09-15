@@ -50,8 +50,12 @@ const basketSlice = createSlice({
         }
       }
     },
+    resetBasket: (state) => {
+      state.basketItems = [];
+    }
   },
 });
 
-export const { addItemToBasket, removeItemFromBasket } = basketSlice.actions;
+export const { addItemToBasket, removeItemFromBasket, resetBasket } =
+  basketSlice.actions;
 export default basketSlice.reducer;

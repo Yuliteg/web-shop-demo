@@ -15,8 +15,11 @@ const Home = () => {
     if (authToken === null && !localStorage.getItem("authToken")) {
       signin();
     }
-    authToken && dispatch(fetchProducts(authToken));
-  }, [authToken, signin, dispatch]);
+
+    if ((authToken || localStorage.getItem("authToken")) && !products.length) {
+      dispatch(fetchProducts(authToken));
+    }
+  }, [authToken, signin, dispatch, products]);
 
   return (
     <Box>
