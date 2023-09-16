@@ -1,6 +1,6 @@
 import EmptyContent from "../components/EmptyContent";
 import emptyBasket from "../assets/shopping-cart.1021x1024.png";
-import BasketTable from "../components/BasketTable";
+import ProductsTable from "../components/ProductsTable";
 import { Box, Button, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
@@ -24,7 +24,7 @@ const Basket = () => {
       <Typography fontSize="30px" textAlign="center" marginBottom="2rem">
         Basket <ShoppingCartIcon color="primary" />
       </Typography>
-      <BasketTable basketData={basketItems} />
+      <ProductsTable productsData={basketItems} />
 
       <Box
         display="flex"

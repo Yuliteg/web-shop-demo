@@ -3,7 +3,7 @@ import EmptyContent from "../components/EmptyContent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
-import BasketTable from "../components/BasketTable";
+import ProductsTable from "../components/ProductsTable";
 import {
   Box,
   Divider,
@@ -125,7 +125,7 @@ const Orders = () => {
                 Order Items:
               </Typography>
               {order.orderItems && (
-                <BasketTable basketData={order.orderItems} isCheckout />
+                <ProductsTable productsData={order.orderItems} isCheckout />
               )}
             </Box>
           </Box>
