@@ -1,10 +1,9 @@
 import emptyOrder from "../assets/empty.1024x801.png";
 import EmptyContent from "../components/EmptyContent";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOrderItemsForOrder, fetchOrders } from "../redux/orderSlice";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
-import BasketTable from "../components/BasketTable";
+import ProductsTable from "../components/ProductsTable";
 import {
   Box,
   Divider,
@@ -13,6 +12,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { fetchOrderItemsForOrder, fetchOrders } from "../api/ordersThunks";
 
 const Orders = () => {
   const { authToken } = useAuth();
@@ -125,7 +125,7 @@ const Orders = () => {
                 Order Items:
               </Typography>
               {order.orderItems && (
-                <BasketTable basketData={order.orderItems} isCheckout />
+                <ProductsTable productsData={order.orderItems} isCheckout />
               )}
             </Box>
           </Box>

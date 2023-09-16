@@ -2,19 +2,14 @@ import {
   CardActions,
   Divider,
   Box,
-  styled,
   Card,
   Typography,
   Button,
 } from "@mui/material";
 import { ShoppingCartOutlined } from "@mui/icons-material";
-import productImg from "../assets/productImg/pexels-ylanite-koppens-1152665.jpg";
+import productImg from "../assets/desk-covered-with-school-supplies-colorful-alarm-clocks.jpg";
 import { useDispatch } from "react-redux";
 import { addItemToBasket } from "../redux/basketSlice";
-
-const CardStyle = styled(Card)(({ theme }) => ({
-  boxShadow: `0px 0px 4px rgba(145, 158, 171, 0.24), 0px 4px 8px -4px rgba(145, 158, 171, 0.24)`,
-}));
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -26,19 +21,20 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <CardStyle>
+    <Card>
       <Box sx={{ pt: "100%", position: "relative" }}>
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-          }}
-          component="img"
+        <img
           src={imageUrl || productImg}
           alt={name}
           loading="lazy"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", 
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
         />
       </Box>
 
@@ -75,7 +71,7 @@ const ProductCard = ({ product }) => {
           </CardActions>
         </Box>
       </Box>
-    </CardStyle>
+    </Card>
   );
 };
 

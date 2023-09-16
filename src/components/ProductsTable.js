@@ -12,7 +12,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useDispatch } from "react-redux";
 import { addItemToBasket, removeItemFromBasket } from "../redux/basketSlice";
 
-const BasketTable = ({ basketData, isCheckout }) => {
+const ProductsTable = ({ productsData, isCheckout }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
@@ -32,7 +32,7 @@ const BasketTable = ({ basketData, isCheckout }) => {
   };
 
   const calculateTotal = () => {
-    const totalPrice = basketData.reduce(
+    const totalPrice = productsData.reduce(
       (total, item) => total + item.amount * item.quantity,
       0
     );
@@ -59,7 +59,7 @@ const BasketTable = ({ basketData, isCheckout }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {basketData.map((item) => (
+            {productsData.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>${item.amount.toFixed(2)}</TableCell>
@@ -95,4 +95,4 @@ const BasketTable = ({ basketData, isCheckout }) => {
   );
 };
 
-export default BasketTable;
+export default ProductsTable;
