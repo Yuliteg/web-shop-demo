@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import createApiAgent from "../api/agent";
+import { baseUrl, company, tenant } from "../lib/constants";
+import axios from "axios";
 
 const initialState = {
   products: [],
@@ -7,13 +8,19 @@ const initialState = {
   error: null,
 };
 
-const apiAgent = createApiAgent();
-
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async (token) => {
     try {
-      return apiAgent.getProducts(token);
+      const response = await axios.get(
+        `${baseUrl}/api/public/${tenant}/pub/${company}/Item/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
     } catch (error) {
       throw error;
     }

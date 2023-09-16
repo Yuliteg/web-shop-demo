@@ -1,10 +1,9 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
+import { baseUrl, tenant } from "../lib/constants";
 
-const baseUrl = "http://webshopdemo.devweb.b-s.si";
-const tenant = "WebShopDemo";
-const login = "admin@local";
+const email = "admin@local";
 const password = "Admin";
 
 const AuthContext = createContext();
@@ -21,13 +20,13 @@ export const AuthProvider = ({ children }) => {
       : null
   );
 
-  const signin = async () => {
+  const signIn = async () => {
     try {
       const response = await axios.post(
         `${baseUrl}/api/${tenant}/Account/Authenticate`,
         {
-          email: login,
-          password: password,
+          email,
+          password,
         }
       );
 
@@ -42,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
   return (
-    <AuthContext.Provider value={{ signin, authToken, user }}>
+    <AuthContext.Provider value={{ signIn, authToken, user }}>
       {children}
     </AuthContext.Provider>
   );

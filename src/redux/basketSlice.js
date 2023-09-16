@@ -34,25 +34,22 @@ const basketSlice = createSlice({
         (item) => item.id === itemToRemove.id
       );
 
+      if (itemIndex === -1) {
+        return;
+      }
+
       const basketItem = state.basketItems[itemIndex];
 
-      if (itemIndex !== -1) {
-        if (action.payload.fullRemove) {
-          state.basketItems.splice(itemIndex, 1);
-        } else {
-          if (basketItem.quantity > 1) {
-            basketItem.quantity -= 1;
-            basketItem.total_Amount =
-              basketItem.amount * state.basketItems[itemIndex].quantity;
-          } else {
-            state.basketItems.splice(itemIndex, 1);
-          }
-        }
+      if (action.payload.fullRemove || basketItem.quantity === 1) {
+        state.basketItems.splice(itemIndex, 1);
+      } else {
+        basketItem.quantity -= 1;
+        basketItem.total_Amount = basketItem.amount * basketItem.quantity;
       }
     },
-    resetBasket: (state) => {
-      state.basketItems = [];
-    }
+  },
+  resetBasket: (state) => {
+    state.basketItems = [];
   },
 });
 
