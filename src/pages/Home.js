@@ -7,19 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/productSlice";
 
 const Home = () => {
-  const { signin, authToken } = useAuth();
+  const { signIn, authToken } = useAuth();
   const dispatch = useDispatch();
   const { products, loading } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (authToken === null && !localStorage.getItem("authToken")) {
-      signin();
+      signIn();
     }
 
     if ((authToken || localStorage.getItem("authToken")) && !products.length) {
       dispatch(fetchProducts(authToken));
     }
-  }, [authToken, signin, dispatch, products]);
+  }, [authToken, signIn, dispatch, products]);
 
   return (
     <Box>
