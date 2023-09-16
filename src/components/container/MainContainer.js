@@ -5,7 +5,7 @@ const MainContainer = ({ children }) => {
     <Container
       sx={{
         paddingTop: "3rem",
-        maxWidth: "1250px !important",
+        maxWidth: "1270px !important",
         minHeight: "var(--minHeight)",
       }}
     >

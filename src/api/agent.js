@@ -6,7 +6,7 @@ const createApiAgent = () => {
     baseURL: baseUrl,
   });
 
-  const getItems = async (token) => {
+  const getProducts = async (token) => {
     try {
       const response = await axiosInstance.get(
         `/api/public/${tenant}/pub/${company}/Item/`,
@@ -22,13 +22,8 @@ const createApiAgent = () => {
     }
   };
 
-  const getProducts = async (token) => {
-    return getItems(token);
-  };
-
   return {
-    getItems,
-    getProducts,
+    getProducts
   };
 };
 
