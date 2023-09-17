@@ -19,14 +19,15 @@ const Navbar = () => {
         height: "var(--navbar-height)",
       }}
     >
-      <nav role="navigation">
+      <nav role="navigation" style={{ height: "100%" }}>
         <Toolbar
           sx={{
             height: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            mx: "4%",
+            maxWidth: "1270px",
+            margin: "0 auto",
           }}
         >
           <NavLink

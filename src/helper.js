@@ -1,4 +1,4 @@
-export const prepareOrderItems = (basketItems) => {
+export const mapOrderItems = (basketItems) => {
   return basketItems.map((item) => ({
     item_Lookup: item.item_Lookup,
     order_Lookup: item.order_Lookup,
