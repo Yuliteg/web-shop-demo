@@ -9,6 +9,7 @@ import { baseUrl, company, tenant } from "../lib/constants";
 
 const initialState = {
   orders: [],
+  emptyOrders: false,
   loading: false,
   createdNewOrder: false,
   error: null,
@@ -70,6 +71,7 @@ const ordersSlice = createSlice({
       .addCase(fetchOrders.fulfilled, (state, action) => {
         state.loading = false;
         state.orders = action.payload;
+        state.emptyOrders = action.payload.length === 0;
       })
       .addCase(fetchOrders.rejected, (state, action) => {
         state.loading = false;

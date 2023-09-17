@@ -1,11 +1,12 @@
 import emptyOrder from "../assets/empty.1024x801.png";
 import EmptyContent from "../components/EmptyContent";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import ProductsTable from "../components/ProductsTable";
 import {
   Box,
+  CircularProgress,
   Divider,
   List,
   ListItem,
@@ -17,15 +18,19 @@ import { fetchOrderItemsForOrder, fetchOrders } from "../api/ordersThunks";
 const Orders = () => {
   const { authToken } = useAuth();
   const dispatch = useDispatch();
-  const { orders } = useSelector((state) => state.orders);
+  const { orders, emptyOrders, loading } = useSelector((state) => state.orders);
 
   const [orderItemsFetched, setOrderItemsFetched] = useState({});
 
-  useEffect(() => {
-    if (!orders || orders.length === 0) {
+  const fetchOrdersIfNeeded = useCallback(() => {
+    if (!orders || orders.length === 0 || emptyOrders) {
       dispatch(fetchOrders(authToken));
     }
-  }, [dispatch, authToken, orders]);
+  }, [dispatch, authToken, emptyOrders]);
+
+  useEffect(() => {
+    fetchOrdersIfNeeded();
+  }, [fetchOrdersIfNeeded]);
 
   useEffect(() => {
     if (orders && orders.length > 0) {
@@ -41,7 +46,20 @@ const Orders = () => {
     }
   }, [dispatch, authToken, orders, orderItemsFetched]);
 
-  if (!orders || !orders.length)
+  if (loading) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="var(--minHeight)"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (emptyOrders) {
     return (
       <EmptyContent
         title="Your Orders"
@@ -50,6 +68,8 @@ const Orders = () => {
         imgSrc={emptyOrder}
       />
     );
+  }
+
   return (
     <Box display="flex" flexDirection="column" justifyContent="center">
       {orders.map((order, index) => (
