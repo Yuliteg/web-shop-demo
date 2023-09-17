@@ -3,10 +3,10 @@ import { Box, Typography, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsTable from "../components/ProductsTable";
 import { useAuth } from "../context/authContext";
-import { resetBasket } from "../redux/basketSlice";
 import { createOrderAndItems } from "../api/ordersThunks";
 import ConfirmationMessage from "../components/ConfirmationMessage";
 import AddressForm from "../components/AddressForm";
+import { resetBasket } from "../redux/basketSlice";
 
 const Checkout = () => {
   const { authToken } = useAuth();

@@ -47,9 +47,9 @@ const basketSlice = createSlice({
         basketItem.total_Amount = basketItem.amount * basketItem.quantity;
       }
     },
-  },
-  resetBasket: (state) => {
-    state.basketItems = [];
+    resetBasket: (state) => {
+      state.basketItems = [];
+    },
   },
 });
 
