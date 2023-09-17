@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { prepareOrderItems } from "../helper";
+import { mapOrderItems } from "../helper";
 import { createOrder, sendOrderItemToServer } from "../redux/orderSlice";
 import axios from "axios";
 import { baseUrl, company, tenant } from "../lib/constants";
@@ -15,7 +15,7 @@ export const createOrderAndItems = createAsyncThunk(
         order_Lookup: `${orderLookup}`,
       }));
 
-      const orderItems = prepareOrderItems(updatedBasketItems);
+      const orderItems = mapOrderItems(updatedBasketItems);
 
       await sendOrderItemToServer(orderItems, authToken);
 
