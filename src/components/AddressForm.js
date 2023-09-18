@@ -17,6 +17,10 @@ const AddressForm = ({ onSubmit }) => {
     });
   };
 
+  const handleInvalid = (e) => {
+    e.target.setCustomValidity("This field is required."); // Set a custom validity message
+  };
+
   return (
     <form onSubmit={(e) => onSubmit(e, formData)}>
       <Box
@@ -38,6 +42,10 @@ const AddressForm = ({ onSubmit }) => {
             "& input": { paddingTop: "11px" },
           }}
           required
+          onInvalid={handleInvalid}
+          inputProps={{
+            pattern: "^\\s*\\S[\\s\\S]*$",
+          }}
         />
         <TextField
           label="City"
@@ -51,6 +59,10 @@ const AddressForm = ({ onSubmit }) => {
             "& input": { paddingTop: "11px" },
           }}
           required
+          onInvalid={handleInvalid}
+          inputProps={{
+            pattern: "^\\s*\\S[\\s\\S]*$",
+          }}
         />
         <TextField
           label="Name"
@@ -64,6 +76,10 @@ const AddressForm = ({ onSubmit }) => {
             "& input": { paddingTop: "11px" },
           }}
           required
+          onInvalid={handleInvalid}
+          inputProps={{
+            pattern: "^\\s*\\S[\\s\\S]*$",
+          }}
         />
         <TextField
           label="Postal Code"
@@ -77,6 +93,10 @@ const AddressForm = ({ onSubmit }) => {
             "& input": { paddingTop: "11px" },
           }}
           required
+          onInvalid={handleInvalid}
+          inputProps={{
+            pattern: "^\\s*\\S[\\s\\S]*$",
+          }}
         />
         <Button
           type="submit"
